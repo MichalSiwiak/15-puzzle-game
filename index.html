@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.standalone.min.css">
+  <link rel="stylesheet" href="now-ui-kit.css" type="text/css">
+  <link rel="stylesheet" href="assets/css/nucleo-icons.css" type="text/css">
+  <script src="assets/js/navbar-ontop.js"></script>
+  <link rel="icon" href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
+  <title>Now UI Kit by Creative Tim</title>
+  <meta name="description" content="Start your development with a beautiful Bootstrap 4 UI kit. It is yours Free.">
+  <meta name="keywords" content="bootstrap 4, bootstrap 4 uit kit, bootstrap 4 kit, now ui, now ui kit, creative tim, html kit, html css template, web template, bootstrap, bootstrap 4, css3 template, frontend, responsive bootstrap template, bootstrap ui kit, responsive ui kit">
+</head>
+
+<body class="">
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table style="margin: 0 auto;">
+              <tbody>
+                <tr>
+                  <td><button col="1" row="1" type="button" style="width:200px; height:200px;font-size : 40px; " onclick="myFunction(this)" class="bg-info rounded text-dark">1</button></td>
+                  <td><button col="2" row="1" type="button" style="width:200px; height:200px;font-size : 40px; " onclick="myFunction(this)" class="bg-info rounded text-dark">2</button></td>
+                  <td><button col="3" row="1" type="button" style="width:200px; height:200px;font-size : 40px; " onclick="myFunction(this)" class="bg-info rounded text-dark">3</button></td>
+                  <td><button col="4" row="1" type="button" style="width:200px; height:200px;font-size : 40px; " onclick="myFunction(this)" class="bg-info rounded text-dark">4</button></td>
+                </tr>
+                <tr>
+                  <td><button col="1" row="2" type="button" style="width:200px; height:200px;font-size : 40px; " onclick="myFunction(this)" class="bg-info rounded text-dark">5</button></td>
+                  <td><button col="2" row="2" type="button" style="width:200px; height:200px;font-size : 40px; " onclick="myFunction(this)" class="bg-info rounded text-dark">6</button></td>
+                  <td><button col="3" row="2" type="button" style="width:200px; height:200px;font-size : 40px; " onclick="myFunction(this)" class="bg-info rounded text-dark">7</button></td>
+                  <td><button col="4" row="2" type="button" style="width:200px; height:200px;font-size : 40px; " onclick="myFunction(this)" class="bg-info rounded text-dark">8</button></td>
+                </tr>
+                <tr>
+                  <td><button col="1" row="3" type="button" style="width:200px; height:200px;font-size : 40px; " onclick="myFunction(this)" class="bg-info rounded text-dark">9</button></td>
+                  <td><button col="2" row="3" type="button" style="width:200px; height:200px;font-size : 40px; " onclick="myFunction(this)" class="bg-info rounded text-dark">10</button></td>
+                  <td><button col="3" row="3" type="button" style="width:200px; height:200px;font-size : 40px; " onclick="myFunction(this)" class="bg-info rounded text-dark">11</button></td>
+                  <td><button col="4" row="3" type="button" style="width:200px; height:200px;font-size : 40px; " onclick="myFunction(this)" class="bg-info rounded text-dark">12</button></td>
+                </tr>
+                <tr>
+                  <td><button col="1" row="4" type="button" style="width:200px; height:200px;font-size : 40px; " onclick="myFunction(this)" class="bg-info rounded text-dark">13</button></td>
+                  <td><button col="2" row="4" type="button" style="width:200px; height:200px;font-size : 40px; " onclick="myFunction(this)" class="bg-info rounded text-dark">14</button></td>
+                  <td><button col="3" row="4" type="button" style="width:200px; height:200px;font-size : 40px; " onclick="myFunction(this)" class="bg-info rounded text-dark">15</button></td>
+                  <td><button col="4" row="4" type="button" style="width:200px; height:200px;font-size : 40px; display:none" onclick="myFunction(this)" id="hid" class="bg-info rounded text-dark">16</button></td>
+                </tr>
+              </tbody>
+            </table>
+            <script>
+function myFunction(x) {
+
+	var hidden = document.getElementById("hid");
+	var text = x.innerHTML;
+
+	var x1 = x.getAttribute("col");
+	var y1 = x.getAttribute("row");
+	var x2 = hidden.getAttribute("col");
+	var y2 = hidden.getAttribute("row");
+
+	var distance = Math.sqrt(Math.pow(x2-x1, 2)+Math.pow(y2-y1, 2))
+
+	var all = document.getElementsByTagName("button");
+for(var i = 0, max = all.length; i < max; i++) 
+{
+    console.log(all[i].innerHTML);
+}
+	if (distance==1){
+		x.style.display = "none";
+    	x.id ="hid";
+		hidden.style.display = 'block';
+		hidden.innerHTML= text;
+		hidden.id = "other"
+	}
+
+
+	
+}
+</script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="assets/js/parallax.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+
+
+</body>
+
+</html>
