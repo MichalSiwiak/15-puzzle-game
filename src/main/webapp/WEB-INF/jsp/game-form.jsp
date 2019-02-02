@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 
 <head>
@@ -32,10 +28,62 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+
+
+    <script>
+        var timeBegan = null
+            , timeStopped = null
+            , stoppedDuration = 0
+            , started = null;
+
+        function start() {
+            if (timeBegan === null) {
+                timeBegan = new Date();
+            }
+
+            if (timeStopped !== null) {
+                stoppedDuration += (new Date() - timeStopped);
+            }
+            console.log(stoppedDuration);
+
+            started = setInterval(clockRunning, 10);
+        }
+
+        function stop() {
+            timeStopped = new Date();
+            clearInterval(started);
+        }
+
+        function reset() {
+            clearInterval(started);
+            stoppedDuration = 0;
+            timeBegan = null;
+            timeStopped = null;
+            document.getElementById("display-area").innerHTML = "00:00:00.000";
+        }
+
+        function clockRunning() {
+            var currentTime = new Date()
+                , timeElapsed = new Date(currentTime - timeBegan - stoppedDuration)
+                , hour = timeElapsed.getUTCHours()
+                , min = timeElapsed.getUTCMinutes()
+                , sec = timeElapsed.getUTCSeconds()
+                , ms = timeElapsed.getUTCMilliseconds();
+
+            document.getElementById("display-area").innerHTML =
+                (hour > 9 ? hour : "0" + hour) + ":" +
+                (min > 9 ? min : "0" + min) + ":" +
+                (sec > 9 ? sec : "0" + sec) + "." +
+                (ms > 99 ? ms : ms > 9 ? "0" + ms : "00" + ms);
+        };
+
+    </script>
 </head>
 
 
 <body class="bg-light text-dark">
+
+
 <div id="wrap">
     <div id="main" class="clear-top">
 
@@ -119,30 +167,34 @@
         <div class="py-5">
             <div class="container">
                 <div class="row">
-
-                    <div class="col-md-2 text-dark text-right">
-                        <p class="lead">Your Name:&nbsp;</p>
+                    <div class="col-md-3">
+                        <div class="form-group text-center m-0"><label class="m-0">Enter your name:</label><input
+                                type="text"
+                                class="form-control w-100"
+                                required="required">
+                        </div>
                     </div>
-                    <div class="text-center col-md-2">
-                        <input type="text" class="form-control" required="required">
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn w-100 btn-info text-body" id="start" type="button"
-                                onclick="start();this.disabled=true">START GAME
+                    <div class="col-md-3 mt-4 mb-0">
+                        <button class="btn w-100 btn-info text-body" onclick="startGame();this.disabled=true;start()"
+                                type="button">START
                         </button>
                     </div>
-                    <div class="col-md-2">
-                        <button class="btn w-100 btn-danger text-body" type="button">STOP GAME</button>
+                    <div class="col-md-3">
+                        <button class="btn w-100 text-body mt-4 btn-danger" onclick="stop()" type="button">STOP</button>
                     </div>
-                    <div class="col-md-2 mt-2">
-                        <p class="">Time:</p>
+                    <div class="col-md-3">
+                        <button class="btn w-100 text-body mt-4 btn-warning" onclick="reset()" type="button">RESUME
+                        </button>
                     </div>
-                    <div class="col-md-2 mb-5">
-                        <div class="col-md-12 mt-2">
-                            <p class="">Movements:<a id="clicks">0</a></p>
-                        </div>
+                </div>
+                <h4 class="text-left m-0 mt-4">TIME:
+                    <output id="display-area">00:00:00.000</output>
+                </h4>
+                <h4 class="text-left mb-5 mt-4"><p class="">MOVEMENTS: <a id="clicks">0</a></p></h4>
 
-                    </div>
+
+                <div class="row">
+
                     <div class="col-md-12">
                         <div class="table-responsive">
                             <table style="margin: 0 auto;">
@@ -255,7 +307,7 @@
                             </table>
 
                             <script>
-                                function start() {
+                                function startGame() {
 
                                     for (var a = [], i = 0; i <= 16; ++i) a[i] = i;
 
