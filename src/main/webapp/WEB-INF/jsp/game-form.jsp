@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
-
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,82 +31,98 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+    <script> var timeBegan = null
+        , timeStopped = null
+        , stoppedDuration = 0
+        , started = null;
 
-
-    <script>
-        var timeBegan = null
-            , timeStopped = null
-            , stoppedDuration = 0
-            , started = null;
-
-        function start() {
-            if (timeBegan === null) {
-                timeBegan = new Date();
-            }
-
-            if (timeStopped !== null) {
-                stoppedDuration += (new Date() - timeStopped);
-            }
-            console.log(stoppedDuration);
-
-            started = setInterval(clockRunning, 10);
+    function start() {
+        for (i = 1; i <= 16; i++) {
+            document.getElementById(i).disabled = false
+        }
+        if (timeBegan === null) {
+            timeBegan = new Date();
         }
 
-        function stop() {
-            timeStopped = new Date();
-            clearInterval(started);
+        if (timeStopped !== null) {
+            stoppedDuration += (new Date() - timeStopped);
         }
+        console.log(stoppedDuration);
 
-        function reset() {
-            clearInterval(started);
-            stoppedDuration = 0;
-            timeBegan = null;
-            timeStopped = null;
-            document.getElementById("display-area").innerHTML = "00:00:00.000";
+        started = setInterval(clockRunning, 10);
+    }
+
+    function stop() {
+        timeStopped = new Date();
+        clearInterval(started);
+
+        for (i = 1; i <= 16; i++) {
+            document.getElementById(i).disabled = true
         }
+        document.getElementById("resumebtn").disabled = false;
+    }
 
-        function clockRunning() {
-            var currentTime = new Date()
-                , timeElapsed = new Date(currentTime - timeBegan - stoppedDuration)
-                , hour = timeElapsed.getUTCHours()
-                , min = timeElapsed.getUTCMinutes()
-                , sec = timeElapsed.getUTCSeconds()
-                , ms = timeElapsed.getUTCMilliseconds();
+    function reset() {
+        clearInterval(started);
+        stoppedDuration = 0;
+        timeBegan = null;
+        timeStopped = null;
+        document.getElementById("display-area").innerHTML = "00:00:00.000";
+    }
 
-            document.getElementById("display-area").innerHTML =
-                (hour > 9 ? hour : "0" + hour) + ":" +
-                (min > 9 ? min : "0" + min) + ":" +
-                (sec > 9 ? sec : "0" + sec) + "." +
-                (ms > 99 ? ms : ms > 9 ? "0" + ms : "00" + ms);
-        };
+    function clockRunning() {
+        var currentTime = new Date()
+            , timeElapsed = new Date(currentTime - timeBegan - stoppedDuration)
+            , hour = timeElapsed.getUTCHours()
+            , min = timeElapsed.getUTCMinutes()
+            , sec = timeElapsed.getUTCSeconds()
+            , ms = timeElapsed.getUTCMilliseconds();
+
+        document.getElementById("display-area").innerHTML =
+            (hour > 9 ? hour : "0" + hour) + ":" +
+            (min > 9 ? min : "0" + min) + ":" +
+            (sec > 9 ? sec : "0" + sec) + "." +
+            (ms > 99 ? ms : ms > 9 ? "0" + ms : "00" + ms);
+    };
+
+
+    function startGame() {
+
+
+        var nameGame = document.getElementById("nameGame");
+
+
+        if (nameGame !== null && nameGame.value === "") {
+            alert("Please, add the player's name");
+        } else {
+
+
+            prepareGame();
+            start();
+            document.getElementById("startbtn").disabled = true;
+        }
+    };
 
     </script>
 </head>
 
-
 <body class="bg-light text-dark">
-
-
 <div id="wrap">
     <div id="main" class="clear-top">
-
-
         <div class="collapse" id="navbarHeader">
             <div class="container">
                 <div class="row">
                     <div class="col-md-7 py-4">
                         <h4>About</h4>
                         <p class="text-info">Free open source projects present different java solutions using spring,
-                            hibernate
-                            and other popular frameworks.</p>
+                            hibernate and other popular frameworks.</p>
                     </div>
                     <div class="col-md-3 offset-md-1 py-4">
                         <h4>Contact</h4>
                         <ul class="list-unstyled">
                             <li>
                                 <a href="https://pl.linkedin.com/in/michalsiwiak" class="text-secondary"
-                                   target="_blank">Follow
-                                    on LinkedIn</a>
+                                   target="_blank">Follow on LinkedIn</a>
                             </li>
                             <li>
                                 <a href="mailto:info@coffeecoding.net" target="_top" class="text-secondary">Email me</a>
@@ -113,14 +132,11 @@
                 </div>
             </div>
         </div>
-
-
         <div class="navbar sticky-top navbar-dark bg-info">
             <div class="container d-flex justify-content-between">
                 <a href="https://www.coffeecoding.net/" class="navbar-brand d-flex align-items-center"><i
                         class="fa fa-home fa-2x lead fa-fw d-inline-block" aria-hidden="true"></i>&nbsp;&nbsp;<text
-                        class="">
-                    HOME
+                        class=""> HOME
                 </text>
                 </a>
                 <a href="https://github.com/MichalSiwiak/15-puzzle-game" target="_blank"
@@ -149,10 +165,8 @@
                         class="navbar-toggler-icon"></span></button>
             </div>
         </div>
-
-
         <div class="text-center py-4 bg-secondary"
-             style="	background-image: linear-gradient(to left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.9));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
+             style="    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.9)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
             <div class="container">
                 <div class="row">
                     <div class="col-md-0">
@@ -162,66 +176,81 @@
                 </div>
             </div>
         </div>
-
-
         <div class="py-5">
             <div class="container">
+                <button class="btn w-100 text-body mt-4" onclick="cokolwiek()" style=" background-color: #E86B38;"
+                        type="button"/>
+                TEST
+                </button>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group text-center m-0"><label class="m-0">Enter your name:</label><input
-                                type="text"
-                                class="form-control w-100"
-                                required="required">
+                                type="text" class="form-control w-100" required="true" id="nameGame">
                         </div>
                     </div>
                     <div class="col-md-3 mt-4 mb-0">
-                        <button class="btn w-100 btn-info text-body" onclick="startGame();this.disabled=true;start()"
-                                type="button">START
+                        <button class="btn w-100 text-body" onclick="startGame();" type="submit" id="startbtn"
+                                style=" background-color: #BEFF85;">START NEW GAME
                         </button>
                     </div>
                     <div class="col-md-3">
-                        <button class="btn w-100 text-body mt-4 btn-danger" onclick="stop()" type="button">STOP</button>
+                        <button class="btn w-100 text-body mt-4" onclick="stop()"
+                                style=" background-color: #E86B38;"
+                                type="button" id="stopbtn" disabled>STOP
+                        </button>
                     </div>
                     <div class="col-md-3">
-                        <button class="btn w-100 text-body mt-4 btn-warning" onclick="reset()" type="button">RESUME
+                        <button class="btn w-100 text-body mt-4" style=" background-color: #FFF285;"
+                                onclick="start();this.disabled=true;" type="button" id="resumebtn" disabled>RESUME
                         </button>
                     </div>
                 </div>
-                <h4 class="text-left m-0 mt-4">TIME:
+                <h6 class="text-left m-0 mt-2">TIME:
                     <output id="display-area">00:00:00.000</output>
-                </h4>
-                <h4 class="text-left mb-5 mt-4"><p class="">MOVEMENTS: <a id="clicks">0</a></p></h4>
-
-
+                </h6>
+                <h6 class="text-left mt-2 mb-2">
+                    <p class="">MOVEMENTS: <a id="clicks">0</a></p>
+                </h6>
+                <div class="text-center py-0" id="results" style="display:none">
+                    <div class="alert col-xs-offset-1 col-xs-10 w-100 text-light alert-success text-center">
+                        <h3 class="m-0"> WELL DONE! </h3>
+                        <form class="m-0" method="post">
+                            <input id="gameUser" type="hidden" name="gameUser" type="text">
+                            <input id="time" type="hidden" name="time" type="text" value="">
+                            <input id="movements" type="hidden" name="movements" type="text" value="">
+                            <br>
+                            <button class="btn text-body" type="submit" onclick="">SAVE RESULTS</button>
+                        </form>
+                    </div>
+                </div>
                 <div class="row">
-
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table style="margin: 0 auto;">
+                            <table id="table" style="margin: 0 auto;">
                                 <tbody>
                                 <tr>
                                     <td>
                                         <button id="1" col="1" row="1" type="button"
                                                 style="width:200px; height:200px;font-size : 40px; "
-                                                onclick="myFunction(this)" class="bg-info rounded text-dark">1
+                                                onclick="myFunction(this)" class="rounded">1
                                         </button>
                                     </td>
                                     <td>
                                         <button id="2" col="2" row="1" type="button"
                                                 style="width:200px; height:200px;font-size : 40px; "
-                                                onclick="myFunction(this)" class="bg-info rounded text-dark">2
+                                                onclick="myFunction(this)" class="rounded">2
                                         </button>
                                     </td>
                                     <td>
                                         <button id="3" col="3" row="1" type="button"
                                                 style="width:200px; height:200px;font-size : 40px; "
-                                                onclick="myFunction(this)" class="bg-info rounded text-dark">3
+                                                onclick="myFunction(this)" class="rounded">3
                                         </button>
                                     </td>
                                     <td>
                                         <button id="4" col="4" row="1" type="button"
                                                 style="width:200px; height:200px;font-size : 40px; "
-                                                onclick="myFunction(this)" class="bg-info rounded text-dark">4
+                                                onclick="myFunction(this)" class="rounded">4
                                         </button>
                                     </td>
                                 </tr>
@@ -229,25 +258,25 @@
                                     <td>
                                         <button id="5" col="1" row="2" type="button"
                                                 style="width:200px; height:200px;font-size : 40px; "
-                                                onclick="myFunction(this)" class="bg-info rounded text-dark">5
+                                                onclick="myFunction(this)" class="rounded">5
                                         </button>
                                     </td>
                                     <td>
                                         <button id="6" col="2" row="2" type="button"
                                                 style="width:200px; height:200px;font-size : 40px; "
-                                                onclick="myFunction(this)" class="bg-info rounded text-dark">6
+                                                onclick="myFunction(this)" class="rounded">6
                                         </button>
                                     </td>
                                     <td>
                                         <button id="7" col="3" row="2" type="button"
                                                 style="width:200px; height:200px;font-size : 40px; "
-                                                onclick="myFunction(this)" class="bg-info rounded text-dark">7
+                                                onclick="myFunction(this)" class="rounded">7
                                         </button>
                                     </td>
                                     <td>
                                         <button id="8" col="4" row="2" type="button"
                                                 style="width:200px; height:200px;font-size : 40px; "
-                                                onclick="myFunction(this)" class="bg-info rounded text-dark">8
+                                                onclick="myFunction(this)" class="rounded">8
                                         </button>
                                     </td>
                                 </tr>
@@ -255,25 +284,25 @@
                                     <td>
                                         <button id="9" col="1" row="3" type="button"
                                                 style="width:200px; height:200px;font-size : 40px; "
-                                                onclick="myFunction(this)" class="bg-info rounded text-dark">9
+                                                onclick="myFunction(this)" class="rounded">9
                                         </button>
                                     </td>
                                     <td>
                                         <button id="10" col="2" row="3" type="button"
                                                 style="width:200px; height:200px;font-size : 40px; "
-                                                onclick="myFunction(this)" class="bg-info rounded text-dark">10
+                                                onclick="myFunction(this)" class="rounded">10
                                         </button>
                                     </td>
                                     <td>
                                         <button id="11" col="3" row="3" type="button"
                                                 style="width:200px; height:200px;font-size : 40px; "
-                                                onclick="myFunction(this)" class="bg-info rounded text-dark">11
+                                                onclick="myFunction(this)" class="rounded">11
                                         </button>
                                     </td>
                                     <td>
                                         <button id="12" col="4" row="3" type="button"
                                                 style="width:200px; height:200px;font-size : 40px; "
-                                                onclick="myFunction(this)" class="bg-info rounded text-dark">12
+                                                onclick="myFunction(this)" class="rounded">12
                                         </button>
                                     </td>
                                 </tr>
@@ -281,44 +310,45 @@
                                     <td>
                                         <button id="13" col="1" row="4" type="button"
                                                 style="width:200px; height:200px;font-size : 40px; "
-                                                onclick="myFunction(this)" class="bg-info rounded text-dark">13
+                                                onclick="myFunction(this)" class="rounded">13
                                         </button>
                                     </td>
                                     <td>
                                         <button id="14" col="2" row="4" type="button"
                                                 style="width:200px; height:200px;font-size : 40px; "
-                                                onclick="myFunction(this)" class="bg-info rounded text-dark">14
+                                                onclick="myFunction(this)" class="rounded">14
                                         </button>
                                     </td>
                                     <td>
                                         <button id="15" col="3" row="4" type="button"
                                                 style="width:200px; height:200px;font-size : 40px; "
-                                                onclick="myFunction(this)" class="bg-info rounded text-dark">15
+                                                onclick="myFunction(this)" class="rounded">15
                                         </button>
                                     </td>
                                     <td>
                                         <button id="16" col="4" row="4" type="button"
                                                 style="width:200px; height:200px;font-size : 40px; "
-                                                onclick="myFunction(this)" class="bg-info rounded text-dark">16
+                                                onclick="myFunction(this)" class="rounded">16
                                         </button>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
-
                             <script>
-                                function startGame() {
-
+                                function prepareGame() {
+                                    document.getElementById("resumebtn").disabled = true;
+                                    document.getElementById("stopbtn").disabled = false;
                                     for (var a = [], i = 0; i <= 16; ++i) a[i] = i;
 
                                     function shuffle(array) {
                                         var tmp, current, top = array.length;
-                                        if (top) while (--top) {
-                                            current = Math.floor(Math.random() * (top + 1));
-                                            tmp = array[current];
-                                            array[current] = array[top];
-                                            array[top] = tmp;
-                                        }
+                                        if (top)
+                                            while (--top) {
+                                                current = Math.floor(Math.random() * (top + 1));
+                                                tmp = array[current];
+                                                array[current] = array[top];
+                                                array[top] = tmp;
+                                            }
                                         return array;
                                     }
 
@@ -327,7 +357,6 @@
                                     if (index > -1) {
                                         a.splice(index, 1);
                                     }
-
                                     for (i = 1; i <= 16; i++) {
                                         document.getElementById(i).innerHTML = a[i - 1];
                                         if (a[i - 1] == 16) {
@@ -342,14 +371,11 @@
                                 function myFunction(x) {
                                     var hidden = document.getElementsByName("hid")[0];
                                     var text = x.innerHTML;
-
                                     var x1 = x.getAttribute("col");
                                     var y1 = x.getAttribute("row");
                                     var x2 = hidden.getAttribute("col");
                                     var y2 = hidden.getAttribute("row");
-
                                     var distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2))
-
                                     if (distance == 1) {
                                         x.style.display = "none";
                                         x.name = "hid";
@@ -357,16 +383,41 @@
                                         hidden.style.display = 'block';
                                         hidden.innerHTML = text;
                                         hidden.name = "other";
+                                        clicks += 1;
+                                        document.getElementById("clicks").innerHTML = clicks;
                                     }
-
-                                    clicks += 1;
-                                    document.getElementById("clicks").innerHTML = clicks;
-
+                                    var check = true;
                                     for (i = 1; i <= 16; i++) {
                                         console.log(document.getElementById(i).innerHTML == i);
-                                        ;
+                                        check = check && (document.getElementById(i).innerHTML == i);
                                     }
 
+                                    console.log("Check = " + check);
+
+                                    if (check) {
+
+
+                                        document.getElementById("results").style.display = 'block';
+                                        document.getElementById("gameUser").value = document.getElementById("nameGame").value;
+                                        document.getElementById("time").value = document.getElementById("display-area").innerHTML;
+                                        document.getElementById("clicks").value = document.getElementById("clicks").innerHTML;
+                                        stop();
+                                        document.getElementById("resumebtn").disabled = true;
+                                        document.getElementById("stopbtn").disabled = true;
+
+
+                                    }
+
+                                }
+
+                                function cokolwiek() {
+                                    document.getElementById("results").style.display = 'block';
+                                    document.getElementById("gameUser").value = document.getElementById("nameGame").value;
+                                    document.getElementById("time").value = document.getElementById("display-area").innerHTML;
+                                    document.getElementById("movements").value = document.getElementById("clicks").innerHTML;
+                                    stop();
+                                    document.getElementById("resumebtn").disabled = true;
+                                    document.getElementById("stopbtn").disabled = true;
                                 }
                             </script>
                         </div>
@@ -374,11 +425,8 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>
-
 <footer class="footer bg-dark text-muted">
     <div class="container">
         <p class="float-right">
@@ -389,5 +437,7 @@
         </p>
     </div>
 </footer>
+
 </body>
+
 </html>
