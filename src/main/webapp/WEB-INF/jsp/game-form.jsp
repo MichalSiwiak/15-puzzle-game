@@ -118,9 +118,208 @@
 
         <div class="py-5">
             <div class="container">
-                <h2>Project Description</h2>
+                <div class="row">
 
+                    <div class="col-md-2 text-dark text-right">
+                        <p class="lead">Your Name:&nbsp;</p>
+                    </div>
+                    <div class="text-center col-md-2">
+                        <input type="text" class="form-control" required="required">
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn w-100 btn-info text-body" id="start" type="button"
+                                onclick="start();this.disabled=true">START GAME
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn w-100 btn-danger text-body" type="button">STOP GAME</button>
+                    </div>
+                    <div class="col-md-2 mt-2">
+                        <p class="">Time:</p>
+                    </div>
+                    <div class="col-md-2 mb-5">
+                        <div class="col-md-12 mt-2">
+                            <p class="">Movements:<a id="clicks">0</a></p>
+                        </div>
 
+                    </div>
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table style="margin: 0 auto;">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <button id="1" col="1" row="1" type="button"
+                                                style="width:200px; height:200px;font-size : 40px; "
+                                                onclick="myFunction(this)" class="bg-info rounded text-dark">1
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button id="2" col="2" row="1" type="button"
+                                                style="width:200px; height:200px;font-size : 40px; "
+                                                onclick="myFunction(this)" class="bg-info rounded text-dark">2
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button id="3" col="3" row="1" type="button"
+                                                style="width:200px; height:200px;font-size : 40px; "
+                                                onclick="myFunction(this)" class="bg-info rounded text-dark">3
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button id="4" col="4" row="1" type="button"
+                                                style="width:200px; height:200px;font-size : 40px; "
+                                                onclick="myFunction(this)" class="bg-info rounded text-dark">4
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button id="5" col="1" row="2" type="button"
+                                                style="width:200px; height:200px;font-size : 40px; "
+                                                onclick="myFunction(this)" class="bg-info rounded text-dark">5
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button id="6" col="2" row="2" type="button"
+                                                style="width:200px; height:200px;font-size : 40px; "
+                                                onclick="myFunction(this)" class="bg-info rounded text-dark">6
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button id="7" col="3" row="2" type="button"
+                                                style="width:200px; height:200px;font-size : 40px; "
+                                                onclick="myFunction(this)" class="bg-info rounded text-dark">7
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button id="8" col="4" row="2" type="button"
+                                                style="width:200px; height:200px;font-size : 40px; "
+                                                onclick="myFunction(this)" class="bg-info rounded text-dark">8
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button id="9" col="1" row="3" type="button"
+                                                style="width:200px; height:200px;font-size : 40px; "
+                                                onclick="myFunction(this)" class="bg-info rounded text-dark">9
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button id="10" col="2" row="3" type="button"
+                                                style="width:200px; height:200px;font-size : 40px; "
+                                                onclick="myFunction(this)" class="bg-info rounded text-dark">10
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button id="11" col="3" row="3" type="button"
+                                                style="width:200px; height:200px;font-size : 40px; "
+                                                onclick="myFunction(this)" class="bg-info rounded text-dark">11
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button id="12" col="4" row="3" type="button"
+                                                style="width:200px; height:200px;font-size : 40px; "
+                                                onclick="myFunction(this)" class="bg-info rounded text-dark">12
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button id="13" col="1" row="4" type="button"
+                                                style="width:200px; height:200px;font-size : 40px; "
+                                                onclick="myFunction(this)" class="bg-info rounded text-dark">13
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button id="14" col="2" row="4" type="button"
+                                                style="width:200px; height:200px;font-size : 40px; "
+                                                onclick="myFunction(this)" class="bg-info rounded text-dark">14
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button id="15" col="3" row="4" type="button"
+                                                style="width:200px; height:200px;font-size : 40px; "
+                                                onclick="myFunction(this)" class="bg-info rounded text-dark">15
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button id="16" col="4" row="4" type="button"
+                                                style="width:200px; height:200px;font-size : 40px; "
+                                                onclick="myFunction(this)" class="bg-info rounded text-dark">16
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <script>
+                                function start() {
+
+                                    for (var a = [], i = 0; i <= 16; ++i) a[i] = i;
+
+                                    function shuffle(array) {
+                                        var tmp, current, top = array.length;
+                                        if (top) while (--top) {
+                                            current = Math.floor(Math.random() * (top + 1));
+                                            tmp = array[current];
+                                            array[current] = array[top];
+                                            array[top] = tmp;
+                                        }
+                                        return array;
+                                    }
+
+                                    a = shuffle(a);
+                                    var index = a.indexOf(0);
+                                    if (index > -1) {
+                                        a.splice(index, 1);
+                                    }
+
+                                    for (i = 1; i <= 16; i++) {
+                                        document.getElementById(i).innerHTML = a[i - 1];
+                                        if (a[i - 1] == 16) {
+                                            document.getElementById(i).style.display = "none";
+                                            document.getElementById(i).name = "hid";
+                                        }
+                                    }
+                                }
+
+                                var clicks = 0;
+
+                                function myFunction(x) {
+                                    var hidden = document.getElementsByName("hid")[0];
+                                    var text = x.innerHTML;
+
+                                    var x1 = x.getAttribute("col");
+                                    var y1 = x.getAttribute("row");
+                                    var x2 = hidden.getAttribute("col");
+                                    var y2 = hidden.getAttribute("row");
+
+                                    var distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2))
+
+                                    if (distance == 1) {
+                                        x.style.display = "none";
+                                        x.name = "hid";
+                                        x.innerHTML = 16;
+                                        hidden.style.display = 'block';
+                                        hidden.innerHTML = text;
+                                        hidden.name = "other";
+                                    }
+
+                                    clicks += 1;
+                                    document.getElementById("clicks").innerHTML = clicks;
+
+                                    for (i = 1; i <= 16; i++) {
+                                        console.log(document.getElementById(i).innerHTML == i);
+                                        ;
+                                    }
+
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
