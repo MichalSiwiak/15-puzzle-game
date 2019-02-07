@@ -105,7 +105,7 @@
     </dependencies>
     <!-- Add support for Maven WAR Plugin -->
     <build>
-        <finalName>15-puzzle-game</finalName>
+        <finalName>puzzle</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
