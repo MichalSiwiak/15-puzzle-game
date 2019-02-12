@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,7 +72,7 @@
                     CODE
                 </text>
                 </a>
-                <a href="${pageContext.request.contextPath}" class="navbar-brand d-flex align-items-center"><i
+                <a href="/puzzle" class="navbar-brand d-flex align-items-center"><i
                         class="fa fa-file-text fa-2x fa-fw lead d-inline-block" aria-hidden="true"></i>&nbsp;&nbsp;<text
                         class="">DESCRIPTION
                 </text>
@@ -93,7 +93,7 @@
             </div>
         </div>
         <div class="text-center py-4 bg-secondary"
-             style="    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.9)); background-position: top left;  background-size: 100%;  background-repeat: repeat;">
+             style="	background-image: linear-gradient(to left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.9));	background-position: top left;	background-size: 100%;	background-repeat: repeat;">
             <div class="container">
                 <div class="row">
                     <div class="col-md-0">
@@ -103,20 +103,9 @@
                 </div>
             </div>
         </div>
-
-
-        <div class="row my-4">
+        <div class="py-5">
             <div class="container p-0">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <a class="btn btn-primary" href="${pageContext.request.contextPath}/demo" role="button">New
-                                    Game</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/demo" role="button">New Game</a>
                 <h1 class="text-center">GAME RESULTS</h1>
                 <table class="table table-striped table-hover">
                     <tbody data-link="row" class="rowlink text-center">
@@ -129,21 +118,19 @@
                         <th>Date</th>
                     </tr>
                     <c:forEach var="game" items="${games}">
-                        <tr onclick="location.href='#';" style="cursor: pointer;">
-                            <td>${game.id}</td>
-                            <td>${game.gameUser}</td>
-                            <td>${game.time}</td>
-                            <td>${game.movements}</td>
-                            <td>${game.score}</td>
-                            <td>${game.date}</td>
-                        </tr>
+                    <tr onclick="location.href='#';" style="cursor: pointer;">
+                        <td>${game.id}</td>
+                        <td>${game.gameUser}</td>
+                        <td>${game.time}</td>
+                        <td>${game.movements}</td>
+                        <td>${game.score}</td>
+                        <td>${game.date}</td>
+                    </tr>
                     </c:forEach>
                     </tbody>
                 </table>
             </div>
         </div>
-
-
     </div>
 </div>
 <footer class="footer bg-dark text-muted">
